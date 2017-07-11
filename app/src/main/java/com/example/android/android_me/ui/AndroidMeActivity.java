@@ -46,7 +46,9 @@ public class AndroidMeActivity extends AppCompatActivity {
         BodyFragment bodyFragment = new BodyFragment();
         LegsFragment legsFragment = new LegsFragment();
 
-        // metodo alternativo per utilizzare una sola classe: BodyPartFragment, anzichè tre: HeadFragment, BodyFragment, LegsFragment (ed un solo layout)
+        // metodo alternativo per utilizzare una sola classe: BodyPartFragment
+        // anzichè tre: HeadFragment, BodyFragment, LegsFragment
+        // ed un solo layout: fragment_body_layout.xml
 //        Bundle headBundle = new Bundle();
 //        headBundle.putInt("bodyPartIndex", BodyPartFragment.HEAD_PART_INDEX);
 //        BodyPartFragment headFragment = new BodyPartFragment();
