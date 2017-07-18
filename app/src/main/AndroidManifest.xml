@@ -7,9 +7,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
 
-        <!-- Declare the MainActivity in the manifest and set it to launch upon opening this app -->
+        android:hardwareAccelerated="true"
+        android:largeHeap="true">
+
+
+    <!-- Declare the MainActivity in the manifest and set it to launch upon opening this app -->
         <activity android:name=".ui.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
