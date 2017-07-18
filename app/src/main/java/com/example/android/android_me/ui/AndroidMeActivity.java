@@ -16,11 +16,12 @@
 
 package com.example.android.android_me.ui;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.example.android.android_me.R;
+import com.example.android.android_me.data.AndroidImageAssets;
 
 // This activity will display a custom Android image composed of three body parts: head, body, and legs
 public class AndroidMeActivity extends AppCompatActivity {
@@ -31,19 +32,40 @@ public class AndroidMeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_android_me);
 
+        if(savedInstanceState == null){
+            buildFragments();
+        }
+    }
+
+    private void buildFragments() {
         // Create a new head BodyPartFragment
         BodyPartFragment headFragment = new BodyPartFragment();
 
-        // TODO (4) Set the list of image id's for the head fragment and set the position to the second image in the list
+        // DONE (4) Set the list of image id's for the head fragment and set the position to the second image in the list
+        headFragment.setImages(AndroidImageAssets.getHeads());
+        //headFragment.setImageIndex(1);
+        //headFragment.setRandomImageIndex();
 
         // Add the fragment to its container using a FragmentManager and a Transaction
         FragmentManager fragmentManager = getSupportFragmentManager();
-
         fragmentManager.beginTransaction()
-                .add(R.id.head_container, headFragment)
+                .replace(R.id.head_container, headFragment)
                 .commit();
 
-        // TODO (5) Create and display the body and leg BodyPartFragments
+        // DONE (5) Create and display the body and leg BodyPartFragments
+        BodyPartFragment bodyFragment = new BodyPartFragment();
+        bodyFragment.setImages(AndroidImageAssets.getBodies());
+        //bodyFragment.setRandomImageIndex();
+        fragmentManager.beginTransaction()
+                .replace(R.id.body_container, bodyFragment)
+                .commit();
 
+        BodyPartFragment legsFragment = new BodyPartFragment();
+        legsFragment.setImages(AndroidImageAssets.getLegs());
+        //legsFragment.setRandomImageIndex();
+        fragmentManager.beginTransaction()
+                .replace(R.id.legs_container, legsFragment)
+                .commit();
     }
+
 }

@@ -18,6 +18,7 @@ package com.example.android.android_me.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +27,24 @@ import android.widget.ImageView;
 import com.example.android.android_me.R;
 import com.example.android.android_me.data.AndroidImageAssets;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class BodyPartFragment extends Fragment {
+    private static final String TAG = BodyPartFragment.class.getSimpleName();
+    private static final Random RANDOM = new Random();
 
-    // TODO (1) Create a setter method and class variable to set and store of a list of image resources
+    private static final String BODY_PARTS = "body_parts";
+    private static final String CURRENT_BODY_PART_INDEX = "current_body_part_index";
 
-    // TODO (2) Create another setter method and variable to track and set the index of the list item to display
+    private List<Integer> mImageResources;
+    private int mImageIndex = 0;
+    private ImageView mImageView;
+
+    // DONE (1) Create a setter method and class variable to set and store of a list of image resources
+
+    // DONE (2) Create another setter method and variable to track and set the index of the list item to display
         // ex. index = 0 is the first image id in the given list , index 1 is the second, and so on
 
     /**
@@ -45,20 +59,82 @@ public class BodyPartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        if (savedInstanceState != null) {
+            mImageResources = savedInstanceState.getIntegerArrayList(BODY_PARTS);
+            mImageIndex = savedInstanceState.getInt(CURRENT_BODY_PART_INDEX);
+            Log.d(TAG, "onCreateView: mImageIndex = " + mImageIndex);
+        }
+
         // Inflate the Android-Me fragment layout
         View rootView = inflater.inflate(R.layout.fragment_body_part, container, false);
 
         // Get a reference to the ImageView in the fragment layout
-        ImageView imageView = (ImageView) rootView.findViewById(R.id.body_part_image_view);
+        mImageView = (ImageView) rootView.findViewById(R.id.body_part_image_view);
 
         // Set the image to the first in our list of head images
-        imageView.setImageResource(AndroidImageAssets.getHeads().get(0));
+        //mImageView.setImageResource(AndroidImageAssets.getHeads().get(mImageIndex));
 
-        // TODO (3) If a list of image ids exists, set the image resource to the correct item in that list
+        // DONE (3) If a list of image ids exists, set the image resource to the correct item in that list
         // Otherwise, create a Log statement that indicates that the list was not found
+        showBodyPart();
+
+        addClickListener();
 
         // Return the rootView
         return rootView;
+    }
+
+
+
+    public void setImages(List<Integer> imageResources){
+        if(imageResources != null){
+            mImageResources = imageResources;
+        } else {
+            mImageResources.clear();
+        }
+    }
+
+    public void setImageIndex(int imageIndex){
+        if(mImageResources != null && imageIndex > -1 && imageIndex < mImageResources.size()){
+            mImageIndex = imageIndex;
+        } else {
+            mImageIndex = 0;
+        }
+    }
+
+    public void setRandomImageIndex() {
+        setImageIndex(RANDOM.nextInt(AndroidImageAssets.getBodies().size()));
+    }
+
+    private void addClickListener() {
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showNextBodyPart();
+            }
+        });
+    }
+
+    private void showNextBodyPart() {
+        ++mImageIndex;
+        showBodyPart();
+    }
+
+    private void showBodyPart() {
+        if(mImageView != null && mImageResources != null && mImageResources.size() > 0){
+            mImageIndex = mImageIndex % mImageResources.size();
+            mImageView.setImageResource(mImageResources.get(mImageIndex));
+        } else {
+            Log.e(TAG, "A list of images doesn't exists.");
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        //super.onSaveInstanceState(outState);
+        Log.d(TAG, "onSaveInstanceState: mImageIndex = " + mImageIndex);
+        outState.putInt(CURRENT_BODY_PART_INDEX, mImageIndex);
+        outState.putIntegerArrayList(BODY_PARTS, (ArrayList<Integer>)mImageResources);
     }
 
 }
