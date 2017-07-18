@@ -11,18 +11,37 @@
  limitations under the License.-->
 
 <!-- GridView that displays AndroidMe images -->
-<!-- TODO (1) Turn this into a LinearLayout and add a "Next" button at the bottom of the gridview -->
-<GridView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/images_grid_view"
-    android:layout_width="match_parent"
+<!-- DONE (1) Turn this into a LinearLayout and add a "Next" button at the bottom of the gridview -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:adjustViewBounds="true"
-    android:columnWidth="180dp"
-    android:gravity="center"
-    android:horizontalSpacing="8dp"
-    android:numColumns="3"
-    android:padding="16dp"
-    android:stretchMode="columnWidth"
-    android:verticalSpacing="8dp">
-</GridView>
+    android:layout_width="match_parent"
+    android:orientation="vertical" >
+
+    <GridView
+        android:id="@+id/images_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:columnWidth="180dp"
+        android:gravity="center"
+        android:horizontalSpacing="4dp"
+        android:numColumns="3"
+        android:padding="0dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="4dp">
+    </GridView>
+
+    <View style="@style/Divider"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"/>
+
+    <Button
+        android:id="@+id/bu_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Next" />
+
+</LinearLayout>

@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 
 import com.example.android.android_me.R;
@@ -32,30 +33,8 @@ import com.example.android.android_me.data.AndroidImageAssets;
 // This fragment displays all of the AndroidMe images in one large list
 // The list appears as a grid of images
 public class MasterListFragment extends Fragment {
-
-    // Define a new interface OnImageClickListener that triggers a callback in the host activity
-    OnImageClickListener mCallback;
-
-    // OnImageClickListener interface, calls a method in the host activity named onImageSelected
-    public interface OnImageClickListener {
-        void onImageSelected(int position);
-    }
-
-    // Override onAttach to make sure that the container activity has implemented the callback
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        // This makes sure that the host activity has implemented the callback interface
-        // If not, it throws an exception
-        try {
-            mCallback = (OnImageClickListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement OnImageClickListener");
-        }
-    }
-
+    // Define a new interface CallbackClickListener that triggers a callback in the host activity
+    CallbackClickListener mCallback;
 
     // Mandatory empty constructor
     public MasterListFragment() {
@@ -87,8 +66,38 @@ public class MasterListFragment extends Fragment {
             }
         });
 
-        // Return the root view
+        // Manage Click on NEXT button
+        Button nextButton = (Button) rootView.findViewById(R.id.bu_next);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCallback.onClickNext();
+            }
+        });
+
+                // Return the root view
         return rootView;
+    }
+
+    // Override onAttach to make sure that the container activity has implemented the callback
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // This makes sure that the host activity has implemented the callback interface
+        // If not, it throws an exception
+        try {
+            mCallback = (CallbackClickListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement CallbackClickListener");
+        }
+    }
+
+    // CallbackClickListener interface, calls a method in the host activity named onImageSelected
+    interface CallbackClickListener {
+        void onImageSelected(int position);
+        void onClickNext();
     }
 
 }

@@ -116,5 +116,4 @@ public class BodyPartFragment extends Fragment {
         currentState.putInt(LIST_INDEX, mListIndex);
     }
 
-
 }
