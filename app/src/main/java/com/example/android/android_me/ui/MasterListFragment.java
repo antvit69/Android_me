@@ -18,25 +18,18 @@ package com.example.android.android_me.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
 import com.example.android.android_me.R;
-import com.example.android.android_me.data.AndroidImageAssets;
 
 
 // This fragment displays all of the AndroidMe images in one large list
 // The list appears as a grid of images
 public class MasterListFragment extends Fragment {
-
-    // TODO (1) Define a new interface OnImageClickListener that triggers a callback in the host activity
-        // The callback is a method named onImageSelected(int position) that contains information about
-        // which position on the grid of images a user has clicked
-
-    // TODO (2) Override onAttach to make sure that the container activity has implemented the callback
-
 
     // Mandatory empty constructor
     public MasterListFragment() {
@@ -50,16 +43,15 @@ public class MasterListFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_master_list, container, false);
 
         // Get a reference to the GridView in the fragment_master_list xml layout file
-        GridView gridView = (GridView) rootView.findViewById(R.id.images_grid_view);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_images);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
 
         // Create the adapter
         // This adapter takes in the context and an ArrayList of ALL the image resources to display
-        MasterListAdapter mAdapter = new MasterListAdapter(getContext(), AndroidImageAssets.getAll());
-
-        // Set the adapter on the GridView
-        gridView.setAdapter(mAdapter);
-
-        // TODO (3) Set a click listener on the gridView and trigger the callback onImageSelected when an item is clicked
+        BodyPartListAdapter bodyPartListAdapter = new BodyPartListAdapter();
+        recyclerView.setAdapter(bodyPartListAdapter);
 
         // Return the root view
         return rootView;
