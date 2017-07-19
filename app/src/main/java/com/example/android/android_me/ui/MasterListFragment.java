@@ -32,14 +32,8 @@ import com.example.android.android_me.data.AndroidImageAssets;
 // This fragment displays all of the AndroidMe images in one large list
 // The list appears as a grid of images
 public class MasterListFragment extends Fragment {
-
     // Define a new interface OnImageClickListener that triggers a callback in the host activity
-    OnImageClickListener mCallback;
-
-    // OnImageClickListener interface, calls a method in the host activity named onImageSelected
-    public interface OnImageClickListener {
-        void onImageSelected(int position);
-    }
+    private OnImageClickListener mCallback;
 
     // Override onAttach to make sure that the container activity has implemented the callback
     @Override
@@ -89,6 +83,12 @@ public class MasterListFragment extends Fragment {
 
         // Return the root view
         return rootView;
+    }
+
+
+    // OnImageClickListener interface, calls a method in the host activity named onImageSelected
+    public interface OnImageClickListener {
+        void onImageSelected(int position);
     }
 
 }

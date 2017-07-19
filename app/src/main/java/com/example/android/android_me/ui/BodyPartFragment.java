@@ -32,8 +32,8 @@ import java.util.List;
 public class BodyPartFragment extends Fragment {
 
     // Final Strings to store state information about the list of images and list index
-    public static final String IMAGE_ID_LIST = "image_ids";
-    public static final String LIST_INDEX = "list_index";
+    private static final String IMAGE_ID_LIST = "image_id_list";
+    private static final String LIST_INDEX = "list_index";
 
     // Tag for logging
     private static final String TAG = "BodyPartFragment";
@@ -41,6 +41,8 @@ public class BodyPartFragment extends Fragment {
     // Variables to store a list of image resources and the index of the image that this fragment displays
     private List<Integer> mImageIds;
     private int mListIndex;
+    private PartChangeListener mPartChangeListener;
+    private int mPartCode;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the fragment
@@ -85,6 +87,9 @@ public class BodyPartFragment extends Fragment {
                     }
                     // Set the image resource to the new list item
                     imageView.setImageResource(mImageIds.get(mListIndex));
+                    if(mPartChangeListener != null){
+                        mPartChangeListener.newIndex(mListIndex, mPartCode);
+                    }
                 }
             });
 
@@ -107,6 +112,10 @@ public class BodyPartFragment extends Fragment {
         mListIndex = index;
     }
 
+    public int getListIndex() {
+        return mListIndex;
+    }
+
     /**
      * Save the current state of this fragment
      */
@@ -116,5 +125,13 @@ public class BodyPartFragment extends Fragment {
         currentState.putInt(LIST_INDEX, mListIndex);
     }
 
+    public void setChangeListener(PartChangeListener listener, int partCode){
+        mPartChangeListener = listener;
+        mPartCode = partCode;
+    }
 
+
+    interface PartChangeListener{
+        public void newIndex(int index, int partCode);
+    }
 }
