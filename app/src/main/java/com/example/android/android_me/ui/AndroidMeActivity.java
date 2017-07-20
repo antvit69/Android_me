@@ -27,10 +27,11 @@ import com.example.android.android_me.data.AndroidImageAssets;
 import static com.example.android.android_me.ui.AppState.BODY_PART_ID;
 import static com.example.android.android_me.ui.AppState.HEAD_PART_ID;
 import static com.example.android.android_me.ui.AppState.LEG_PART_ID;
+import static com.example.android.android_me.ui.AppState.MYTAG;
 
 // This activity will display a custom Android image composed of three body parts: head, body, and legs
 public class AndroidMeActivity extends AppCompatActivity {
-    private final String TAG =  "antlap_" + AndroidMeActivity.class.getSimpleName();
+    private final String TAG =  MYTAG + AndroidMeActivity.class.getSimpleName();
 
     private AppState appState;
 

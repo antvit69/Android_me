@@ -9,6 +9,7 @@ import android.util.Log;
  */
 
 public class AppState implements BodyPartFragment.PartChangeListener {
+    public static final String MYTAG = "antlap_";
     public static final String ANDROIDME_PREFERENCES = "AndroidMe";
     public static final String HEAD_INDEX_LABEL = "headIndex";
     public static final String BODY_INDEX_LABEL = "bodyIndex";
@@ -18,7 +19,7 @@ public class AppState implements BodyPartFragment.PartChangeListener {
     public static final int LEG_PART_ID = 2;
 
     private static final AppState sInstance = new AppState();
-    private static final String TAG =  "antlap_" + AppState.class.getSimpleName();
+    private static final String TAG = MYTAG + AppState.class.getSimpleName();
 
     private int headIndex;
     private int bodyIndex;
@@ -33,7 +34,7 @@ public class AppState implements BodyPartFragment.PartChangeListener {
     }
 
     public void setContext(Context context){
-        boolean isFirstTime = context == null;
+        boolean isFirstTime = sInstance.context == null;
         sInstance.context = context;
         if(isFirstTime){
             loadSharedPreferences();

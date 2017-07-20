@@ -32,11 +32,12 @@ import com.example.android.android_me.data.AndroidImageAssets;
 import static com.example.android.android_me.ui.AppState.HEAD_PART_ID;
 import static com.example.android.android_me.ui.AppState.BODY_PART_ID;
 import static com.example.android.android_me.ui.AppState.LEG_PART_ID;
+import static com.example.android.android_me.ui.AppState.MYTAG;
 
 // This activity is responsible for displaying the master list of all images
 // Implement the MasterListFragment callback, OnImageClickListener
 public class MainActivity extends AppCompatActivity implements MasterListFragment.OnImageClickListener {
-    private static final String TAG = "antlap_" + MainActivity.class.getSimpleName();
+    private static final String TAG = MYTAG + MainActivity.class.getSimpleName();
 
     private AppState appState;
 
