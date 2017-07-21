@@ -54,8 +54,8 @@ public class MasterListFragment extends Fragment {
 
         // Create the adapter
         // This adapter takes in the context and an ArrayList of ALL the image resources to display
-        BodyPartListAdapter bodyPartListAdapter = new BodyPartListAdapter(mCallback);
-        recyclerView.setAdapter(bodyPartListAdapter);
+        MasterListAdapter masterListAdapter = new MasterListAdapter(mCallback);
+        recyclerView.setAdapter(masterListAdapter);
 
         // Return the root view
         return rootView;

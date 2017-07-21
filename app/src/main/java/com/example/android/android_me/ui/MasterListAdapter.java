@@ -15,19 +15,21 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import static com.example.android.android_me.ui.AppState.MYTAG;
+
 /**
  * Created by antlap on 13/07/2017.
  */
 
-public class BodyPartListAdapter extends RecyclerView.Adapter<BodyPartListAdapter.BodyImagesRowHolder> {
-    private static final String TAG = BodyPartListAdapter.class.getSimpleName();
+public class MasterListAdapter extends RecyclerView.Adapter<MasterListAdapter.BodyImagesRowHolder> {
+    private static final String TAG = MYTAG + MasterListAdapter.class.getSimpleName();
 
     final private List<Integer> mAllImages = AndroidImageAssets.getAll();
     private static int currentImageIndex = 0;
     private final MasterListFragment.OnImageClickListener mCallback;
     private Context mContext;
 
-    public BodyPartListAdapter(MasterListFragment.OnImageClickListener callback){
+    public MasterListAdapter(MasterListFragment.OnImageClickListener callback){
         mCallback = callback;
 //        mAllImages.addAll(AndroidImageAssets.getAll());
 //        mAllImages.addAll(AndroidImageAssets.getAll());
@@ -94,9 +96,9 @@ public class BodyPartListAdapter extends RecyclerView.Adapter<BodyPartListAdapte
             imageViewSecondColumn = (ImageView) itemView.findViewById(R.id.iv_column2);
             imageViewThirdColumn = (ImageView) itemView.findViewById(R.id.iv_column3);
 
-            imageViewFirstColumn.setTag(0);
-            imageViewSecondColumn.setTag(1);
-            imageViewThirdColumn.setTag(2);
+            imageViewFirstColumn.setTag(0);  // = imageView of column = 0
+            imageViewSecondColumn.setTag(1); // = imageView of column = 1
+            imageViewThirdColumn.setTag(2);  // = imageView of column = 2
 
             imageViewFirstColumn.setOnClickListener(this);
             imageViewFirstColumn.setOnLongClickListener(this);
