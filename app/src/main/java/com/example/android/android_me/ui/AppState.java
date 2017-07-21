@@ -75,12 +75,13 @@ public class AppState implements BodyPartFragment.PartChangeListener {
         return legIndex;
     }
 
+
     private SharedPreferences getSharedPreferences() {
         SharedPreferences prefs;
         try {
             prefs = context.getSharedPreferences(ANDROIDME_PREFERENCES, Context.MODE_PRIVATE);
         } catch (NullPointerException exc) {
-            throw new IllegalMonitorStateException("Context undefined, use setContext");
+            throw new IllegalMonitorStateException("Context undefined, must setContext first.");
         }
         return prefs;
     }
