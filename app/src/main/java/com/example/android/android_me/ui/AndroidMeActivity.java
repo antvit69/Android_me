@@ -88,33 +88,12 @@ public class AndroidMeActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        Log.d(TAG, "onPause: ");
-//        close();
-//    }
-
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
-//        Log.d(TAG, "onSaveInstanceState: ");
-//        outState.putInt(HEAD_INDEX_LABEL, headIndex);
-//        outState.putInt(BODY_INDEX_LABEL, bodyIndex);
-//        outState.putInt(LEG_INDEX_LABEL, legIndex);
-//    }
-
     @Override
     protected void onStop() {
         super.onStop();
         Log.d(TAG, "onStop: ");
         close();
     }
-
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        Log.d(TAG, "onDestroy: ");
-//    }
 
     private void close(){
         Log.d(TAG, "close: ");

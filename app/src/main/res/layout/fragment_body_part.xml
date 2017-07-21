@@ -11,10 +11,12 @@
  limitations under the License.-->
 
 <!-- This fragment layout displays just one image of an Android-Me body part -->
-<ImageView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/body_part_image_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+
+    tools:src="@drawable/head1">
 
 </ImageView>

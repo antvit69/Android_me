@@ -12,33 +12,30 @@
 
 <!-- GridView that displays AndroidMe images -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_masterlist"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
 
-    <GridView
-        android:id="@+id/images_grid_view"
+    tools:context="ui.MasterListFragment">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_images"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7"
-        android:adjustViewBounds="true"
-        android:columnWidth="180dp"
-        android:gravity="center"
-        android:horizontalSpacing="4dp"
-        android:numColumns="3"
-        android:padding="0dp"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="4dp">
-    </GridView>
+        android:layout_weight="8"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"/>
 
     <!-- The "Next" button -->
     <Button
         android:id="@+id/next_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
         android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
         android:text="Next" />
 
 
