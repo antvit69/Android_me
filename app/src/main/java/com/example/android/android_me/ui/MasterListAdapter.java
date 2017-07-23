@@ -2,7 +2,6 @@ package com.example.android.android_me.ui;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +14,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static com.example.android.android_me.ui.AppState.MYTAG;
-
 /**
  * Created by antlap on 13/07/2017.
  */
 
 public class MasterListAdapter extends RecyclerView.Adapter<MasterListAdapter.BodyImagesRowHolder> {
-    private static final String TAG = MYTAG + MasterListAdapter.class.getSimpleName();
+    private static final String TAG = MasterListAdapter.class.getSimpleName();
 
     final private List<Integer> mAllImages = AndroidImageAssets.getAll();
     private static int currentImageIndex = 0;
@@ -54,7 +51,7 @@ public class MasterListAdapter extends RecyclerView.Adapter<MasterListAdapter.Bo
 
         for (int i = 0; i < 3; i++) {
             int imgIdx = currentImageIndex + i;
-            Log.d(TAG, "getNextImages: imgIdx = " + imgIdx);
+            //Log.d(TAG, "getNextImages: imgIdx = " + imgIdx);
             images[i] = mAllImages.get(imgIdx);
         }
 
@@ -72,7 +69,7 @@ public class MasterListAdapter extends RecyclerView.Adapter<MasterListAdapter.Bo
 
         for(int i = 0; i < 3; i++){
             int imgIdx = position * 3 + i;
-            Log.d(TAG, "getImagesForPosition: imgIdx = " + imgIdx);
+//            Log.d(TAG, "getImagesForPosition: imgIdx = " + imgIdx);
             images[i] = mAllImages.get(imgIdx);
         }
 

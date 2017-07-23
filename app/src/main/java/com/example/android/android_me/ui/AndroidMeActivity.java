@@ -19,19 +19,20 @@ package com.example.android.android_me.ui;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+
+import com.example.android.android_me.general.AppState;
+import com.example.android.android_me.log.Logbook.Log;
 
 import com.example.android.android_me.R;
 import com.example.android.android_me.data.AndroidImageAssets;
 
-import static com.example.android.android_me.ui.AppState.BODY_PART_ID;
-import static com.example.android.android_me.ui.AppState.HEAD_PART_ID;
-import static com.example.android.android_me.ui.AppState.LEG_PART_ID;
-import static com.example.android.android_me.ui.AppState.MYTAG;
+import static com.example.android.android_me.general.AppState.BODY_PART_ID;
+import static com.example.android.android_me.general.AppState.HEAD_PART_ID;
+import static com.example.android.android_me.general.AppState.LEG_PART_ID;
 
 // This activity will display a custom Android image composed of three body parts: head, body, and legs
 public class AndroidMeActivity extends AppCompatActivity {
-    private final String TAG =  MYTAG + AndroidMeActivity.class.getSimpleName();
+    private final String TAG =  AndroidMeActivity.class.getSimpleName();
 
     private AppState appState;
 

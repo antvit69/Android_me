@@ -4,7 +4,7 @@
     android:id="@+id/sw600dp_layout"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
 
     tools:context="ui.MainActivity">
 
@@ -25,7 +25,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
+        android:layout_height="540dp"
         android:id="@+id/android_me_linear_layout"
         android:background="@android:color/white"
         android:orientation="vertical"
@@ -38,21 +38,18 @@
         <!-- This container holds the head BodyPartFragment of the custom Android-Me image -->
         <FrameLayout android:id="@+id/head_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="180dp"
             android:scaleType="centerInside"/>
 
         <!-- The remaining containers for the body and leg BodyPartFragments -->
         <FrameLayout android:id="@+id/body_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="180dp"
             android:scaleType="centerInside"/>
 
         <FrameLayout android:id="@+id/leg_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="180dp"
             android:scaleType="centerInside"/>
     </LinearLayout>
 

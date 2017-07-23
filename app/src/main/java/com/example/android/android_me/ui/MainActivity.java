@@ -20,7 +20,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+
+import com.example.android.android_me.general.AppState;
+import com.example.android.android_me.log.Logbook.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,15 +31,14 @@ import android.widget.Toast;
 import com.example.android.android_me.R;
 import com.example.android.android_me.data.AndroidImageAssets;
 
-import static com.example.android.android_me.ui.AppState.BODY_PART_ID;
-import static com.example.android.android_me.ui.AppState.HEAD_PART_ID;
-import static com.example.android.android_me.ui.AppState.LEG_PART_ID;
-import static com.example.android.android_me.ui.AppState.MYTAG;
+import static com.example.android.android_me.general.AppState.BODY_PART_ID;
+import static com.example.android.android_me.general.AppState.HEAD_PART_ID;
+import static com.example.android.android_me.general.AppState.LEG_PART_ID;
 
 // This activity is responsible for displaying the master list of all images
 // Implement the MasterListFragment callback, OnImageClickListener
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, MasterListFragment.OnImageClickListener {
-    private static final String TAG = MYTAG + MainActivity.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private AppState appState;
 
@@ -78,8 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
         appState.persistState();
+        Log.d(TAG, "onDestroy: ");
     }
 
     private void showFullBodyParts() {

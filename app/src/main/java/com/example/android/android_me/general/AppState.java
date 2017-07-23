@@ -1,15 +1,24 @@
-package com.example.android.android_me.ui;
+package com.example.android.android_me.general;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
+
+import com.example.android.android_me.BuildConfig;
+import com.example.android.android_me.log.CustomTree;
+import com.example.android.android_me.log.Logbook.Log;
+import com.example.android.android_me.ui.BodyPartFragment;
+
+import timber.log.Timber;
 
 /**
  * Created by antlap on 20/07/2017.
  */
 
-public class AppState implements BodyPartFragment.PartChangeListener {
-    public static final String MYTAG = "antlap_";
+public class AppState extends Application implements BodyPartFragment.PartChangeListener {
+    private static final String TAG = AppState.class.getSimpleName();
+    private static final AppState sInstance = new AppState();
+
     public static final String ANDROIDME_PREFERENCES = "AndroidMe";
     public static final String HEAD_INDEX_LABEL = "headIndex";
     public static final String BODY_INDEX_LABEL = "bodyIndex";
@@ -17,9 +26,6 @@ public class AppState implements BodyPartFragment.PartChangeListener {
     public static final int HEAD_PART_ID = 0;
     public static final int BODY_PART_ID = 1;
     public static final int LEG_PART_ID = 2;
-
-    private static final AppState sInstance = new AppState();
-    private static final String TAG = MYTAG + AppState.class.getSimpleName();
 
     private int headIndex;
     private int bodyIndex;
@@ -30,10 +36,39 @@ public class AppState implements BodyPartFragment.PartChangeListener {
     }
 
     public static AppState getInstance() {
+        if(BuildConfig.DEBUG) {
+            Log.d(TAG, "getInstance: waiting for setContext call.");
+        }
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new CustomTree());
+        }
+
+        testLoggers();
+
         return sInstance;
     }
 
+    private static void testLoggers() {
+        Timber.v("Timber log test 123-%s", 45);
+        Timber.d("Timber log test 123-%s", 67);
+        Timber.i("Timber log test 123-%s", 89);
+        Timber.w("Timber log test 123-%s", 90);
+        Timber.e("Timber log test 123-%s", 12);
+        Timber.wtf("Timber log test 123-%s", 34);
+
+        Log.v(TAG, "Logbook log test 123-%s-%s", 4, 5);
+        Log.d(TAG, "Logbook log test 123-%s-%s", 6, 7);
+        Log.i(TAG, "Logbook log test 123-%s-%s", 8, 9);
+        Log.w(TAG, "Logbook log test 123-%s-%s", 0, 1);
+        Log.e(TAG, "Logbook log test 123-%s-%s", 2, 3);
+        Log.wtf(TAG, "Logbook log test 123-%s-%s", 3, 4);
+        Log.e(TAG, "Logbook log test 123-%s-%s", new NullPointerException("A my NullPointerException!"), 11, 22);
+        Log.e(TAG, new NullPointerException("A my NullPointerException!"));
+    }
+
     public void setContext(Context context){
+        Timber.d("setContext: ");
         boolean isFirstTime = sInstance.context == null;
         sInstance.context = context;
         if(isFirstTime){
@@ -43,12 +78,6 @@ public class AppState implements BodyPartFragment.PartChangeListener {
 
     public void persistState(){
         sInstance.saveSharedPreferences();
-    }
-
-    public void setIndexes(int headIndex, int bodyIndex, int legIndex){
-        this.headIndex = headIndex;
-        this.bodyIndex = bodyIndex;
-        this.legIndex = legIndex;
     }
 
     public void setHeadIndex(int headIndex){
@@ -88,6 +117,7 @@ public class AppState implements BodyPartFragment.PartChangeListener {
 
     private void loadSharedPreferences() {
         Log.d(TAG, "loading state from SharedPreferences");
+        Timber.d("loading state from SharedPreferences");
         SharedPreferences prefs = getSharedPreferences();
         headIndex = prefs.getInt(HEAD_INDEX_LABEL, 0);
         bodyIndex = prefs.getInt(BODY_INDEX_LABEL, 0);
@@ -96,6 +126,7 @@ public class AppState implements BodyPartFragment.PartChangeListener {
 
     private void saveSharedPreferences() {
         Log.d(TAG, "saveSharedPreferences: headIndex = " + headIndex + ", bodyIndex = " + bodyIndex + ", legIndex = " + legIndex);
+        Timber.d("saveSharedPreferences: headIndex = %s, bodyIndex = %s, legIndex = %s", headIndex, bodyIndex, legIndex);
         SharedPreferences prefs = getSharedPreferences();
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(HEAD_INDEX_LABEL, headIndex);
@@ -106,7 +137,8 @@ public class AppState implements BodyPartFragment.PartChangeListener {
 
     @Override
     public void newIndex(int index, int partCode) {
-        Log.d(TAG, "Body part changed: index=" + index + " - partCode = " + partCode);
+        Log.d(TAG, "Body part changed: index = " + index + " - partCode = " + partCode);
+        Timber.d("Body part changed: index = %s - partCode = %s", index, partCode);
         switch(partCode){
             case HEAD_PART_ID: //HEAD
                 headIndex = index;
@@ -119,4 +151,5 @@ public class AppState implements BodyPartFragment.PartChangeListener {
                 break;
         }
     }
+
 }
